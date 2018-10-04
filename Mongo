@@ -1,0 +1,65 @@
+-----------MongoDB - Overview-------------
+MongoDB is a cross-platform, document oriented database that provides, high performance, high availability, and easy scalability. 
+MongoDB works on concept of collection and document.
+
+Database is a physical container for collections.
+Collection is a group of MongoDB documents.
+Collections do not enforce a schema. 
+Documents within a collection can have different fields.
+A document is a set of key-value pairs. Documents have dynamic schema. 
+Dynamic schema means that documents in the same collection do not need to have the same set of fields or structure.
+
+_id is a 12 bytes hexadecimal number which assures the uniqueness of every document.
+These 12 bytes first 4 bytes for the current timestamp, next 3 bytes for machine id, 
+next 2 bytes for process id of MongoDB server and remaining 3 bytes are simple incremental VALUE.
+
+
+------MongoDB - Advantages -----
+Schema less − MongoDB is a document database in which one collection holds different documents. 
+Number of fields, content and size of the document can differ from one document to another.
+Deep query-ability. MongoDB supports dynamic queries on documents using a document-based query language 
+that's nearly as powerful as SQL.
+Ease of scale-out − MongoDB is easy to scale.
+Document Oriented Storage − Data is stored in the form of JSON style documents.
+Index on any attribute
+Replication and high availability
+
+
+
+-------MongoDB - Command ------
+use DATABASE_NAME
+show dbs
+db.dropDatabase()
+show collections
+db.createCollection(name, options)
+db.COLLECTION_NAME.drop()
+db.COLLECTION_NAME.insert(document)   
+db.COLLECTION_NAME.find()   --Select *
+db.mycol.find().pretty()   -- Display in readable format
+db.COLLECTION_NAME.update(SELECTION_CRITERIA, UPDATED_DATA)
+db.COLLECTION_NAME.save({_id:ObjectId(),NEW_DATA})   --replace existing documents
+db.COLLECTION_NAME.remove(DELLETION_CRITTERIA)
+db.COLLECTION_NAME.find({},{KEY:1})    --Select particular columns
+db.COLLECTION_NAME.find().limit(NUMBER)  -- Limit number of documents fetch
+db.COLLECTION_NAME.find().limit(NUMBER).skip(NUMBER)
+db.COLLECTION_NAME.find().sort({KEY:1})  
+db.COLLECTION_NAME.ensureIndex({KEY:1})
+db.COLLECTION_NAME.aggregate(AGGREGATE_OPERATION)
+
+
+-----------How Replication Works in MongoDB-----
+MongoDB achieves replication by the use of replica set. 
+A replica set is a group of mongod instances that host the same data set. 
+In a replica, one node is primary node that receives all write operations. 
+All other instances, such as secondaries, apply operations from the primary so that they have the same data set. 
+Replica set can have only one primary node.
+
+
+-----------MongoDB - Sharding-------
+Sharding is the process of storing data records across multiple machines and 
+it is MongoDB's approach to meeting the demands of data growth. 
+As the size of the data increases, a single machine may not be sufficient to store the data 
+nor provide an acceptable read and write throughput.
+Sharding solves the problem with horizontal scaling. 
+With sharding, you add more machines to support data growth and the demands of read and write operations.
+
