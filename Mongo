@@ -63,3 +63,39 @@ nor provide an acceptable read and write throughput.
 Sharding solves the problem with horizontal scaling. 
 With sharding, you add more machines to support data growth and the demands of read and write operations.
 
+Shards − Shards are used to store data. 
+They provide high availability and data consistency. 
+In production environment, each shard is a separate replica set.
+
+Config Servers − Config servers store the cluster's metadata. 
+This data contains a mapping of the cluster's data set to the shards. 
+The query router uses this metadata to target operations to specific shards. 
+In production environment, sharded clusters have exactly 3 config servers.
+
+Query Routers − Query routers are basically mongo instances, 
+interface with client applications and direct operations to the appropriate shard. 
+The query router processes and targets the operations to shards and then returns results to the clients. 
+A sharded cluster can contain more than one query router to divide the client request load. 
+A client sends requests to one query router. Generally, a sharded cluster have many query routers.
+
+
+---------MongoDB - GridFS------
+GridFS is the MongoDB specification for storing and retrieving large files such as images, audio files, video files, etc. 
+It is kind of a file system to store files but its data is stored within MongoDB collections.
+GridFS divides a file into chunks and stores each chunk of data in a separate document, each of maximum size 255k.
+GridFS by default uses two collections fs.files and fs.chunks to store the file's metadata and the chunks. 
+Each chunk is identified by its unique _id ObjectId field. The fs.files serves as a parent document. 
+The files_id field in the fs.chunks document links the chunk to its parent.
+
+
+
+------------MongoDB - Capped Collections------------
+Capped collections are fixed-size circular collections that follow the 
+insertion order to support high performance for create, read, and delete operations. 
+By circular, it means that when the fixed size allocated to the collection is exhausted, 
+it will start deleting the oldest document in the collection without providing any explicit commands.
+
+Capped collections restrict updates to the documents if the update results in increased document size. 
+Since capped collections store documents in the order of the disk storage, 
+it ensures that the document size does not increase the size allocated on the disk. 
+Capped collections are best for storing log information, cache data, or any other high volume data.
